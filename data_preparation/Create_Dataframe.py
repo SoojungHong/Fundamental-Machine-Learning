@@ -167,3 +167,21 @@ df2 = pd.DataFrame(d2)
 
 joined_df = pd.concat([df1, df2], axis=0) # axis = 0 means, vertically (row-wise) concatenation
 print(joined_df)
+
+
+"""
+while reading JSON file, increase the row of DataFrame 
+"""
+col_name = ['id', 'ridge2_x_diff', 'ridge2_y_diff', 'class'] # class 1 : yes, class 0 : no
+
+df = pd.DataFrame(columns=col_name) # dataframe that contains all yes, no data
+
+for f in glob.glob(yes_data_path + "*.json"):
+    fname = os.path.basename(f)
+
+    with open(yes_data_path+fname, "r") as yes_f:
+        data = json.load(yes_f)
+        ridge2_x_move_diff = np.max(data['Ridge2']['x']) - np.min(data['Ridge2']['x'])
+        ridge2_y_move_diff = np.max(data['Ridge2']['y']) - np.min(data['Ridge2']['y'])
+
+        df.loc[len(df.index)] = [fname, ridge2_x_move_diff, ridge2_y_move_diff, 1]
