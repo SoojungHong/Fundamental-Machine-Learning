@@ -59,3 +59,26 @@ https://github.com/Shathe/Ev-SegNet
 
 
 https://drive.google.com/file/d/1eTX6GXy5qP9I4PWdD4MkRRbEtfg65XCr/view
+
+
+## Reference of ToF camera data usage
+
+https://www.researchgate.net/publication/353544192_High-speed_object_detection_with_a_single-photon_time-of-flight_image_sensor
+
+This paper shows how pre-process the ToF image before using as input to UNet for Semantic Segmentation. 
+'''
+Each frame must be pre-processed before being fed to the neural network. All data types
+are normalized to values between 0 and 1. Depth data is corrected with a calibration frame
+to compensate for temporal skew in photon timing across the SPAD array. SPC-256 data is
+processed with a median ﬁlter of size 2
+×
+2 to remove any outliers in the frame. SPC-64 is a
+resized version of SPC-256. Histogram data is altered by subtracting the median of each pixel’s
+histogram to remove the background level. When summing all the bins of this histogram, we get
+a type of intensity image that preserves the active illumination from the laser but has minimal
+contribution from ambient light. This active intensity data, together with the depth frame, are
+concatenated to form the data type Act_I-D. The dataset as a whole is augmented by applying a
+horizontal ﬂip to each frame, thus doubling the quantity of frames. Finally, the dataset’s order is
+shuﬄed randomly to prevent tuning the weights of the neural network speciﬁcally for a given class
+before seeing examples of others. Not doing so can lead to a local minimum in the optimisation
+problem far from the absolute minimum'''
