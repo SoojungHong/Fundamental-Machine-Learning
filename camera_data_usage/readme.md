@@ -16,6 +16,8 @@ How to use Event-camera data?
 common first step: encode the event information into an image-like representation, in order to facilitate its processing.
 We discuss in detail different previous work event representations (encoding spatial and temporal information) as well as our proposed representation (with a different way of encoding the temporal information)
 
+How Event data (by Even camera) look like? Answer is in Chapter 3.1  
+
 
 
 ### Time of Flight (ToF) camera 
