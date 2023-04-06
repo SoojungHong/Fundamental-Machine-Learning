@@ -2,3 +2,7 @@
   event data (.txt) read as ndarray 
   event_tensor is transformed from event data 
   event_voxel is converted from event_tensor
+
+2. Input format to model 
+   number of voxel is N
+   input to model is N * voxel (num_bin * W * H) 
