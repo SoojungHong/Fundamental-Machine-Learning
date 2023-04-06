@@ -1,0 +1,4 @@
+1. rpg_e2vid project 
+  event data (.txt) read as ndarray 
+  event_tensor is transformed from event data 
+  event_voxel is converted from event_tensor
