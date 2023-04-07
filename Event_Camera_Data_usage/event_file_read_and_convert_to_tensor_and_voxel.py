@@ -100,7 +100,7 @@ def events_to_voxel_grid_pytorch(events, num_bins, width, height, device):
 #------------------------------------------------------------
 event_window_iterator = FixedSizeEventReader(path_to_events, num_events=N, start_index=start_index)
       
-for event_window in event_window_iterator:
+for event_window in event_window_iterator: # event_window is ndarray (11559, 4)
   last_timestamp = event_window[-1, 0]
   with Timer('Building event tensor'):
     if args.compute_voxel_grid_on_cpu:
