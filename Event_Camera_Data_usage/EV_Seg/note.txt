@@ -19,6 +19,7 @@ mask_image (320, 320)
 y_, y_aux_ = model(x)
 
 model's input to forward() function is Tensor type (2, 3, 320, 320) 
-Y_ is Tensor type (2, 6, 320, 320)
+Y
+y_ is Tensor type (2, 6, 320, 320)
 y_aux_ Tensor type (2, 6, 320, 320) 
 
