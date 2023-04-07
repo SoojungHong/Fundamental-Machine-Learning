@@ -37,3 +37,4 @@ def update_reconstruction(self, event_tensor, event_tensor_id, stamp=None):
            for channel in events_for_each_channel.keys():
               #with CudaTimer('Inference'):
               new_predicted_frame, states = self.model(events_for_each_channel[channel], self.last_states_for_each_channel[channel])
+                # events_for_each_channel[channel] is a Tensor type, (1, 5, 184, 240)
