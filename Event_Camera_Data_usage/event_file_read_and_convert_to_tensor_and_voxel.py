@@ -104,7 +104,7 @@ for event_window in event_window_iterator: # event_window is ndarray (11559, 4)
   last_timestamp = event_window[-1, 0]
   with Timer('Building event tensor'):
     if args.compute_voxel_grid_on_cpu:
-        event_tensor = events_to_voxel_grid(event_window, num_bins=model.num_bins, width=width, height=height)
+        event_tensor = events_to_voxel_grid(event_window, num_bins=model.num_bins, width=width, height=height) # event_tensor : Tensor type (5, 180, 240)
         event_tensor = torch.from_numpy(event_tensor)
     else:
         event_tensor = events_to_voxel_grid_pytorch(event_window, num_bins=model.num_bins, width=width, height=height, device=device)
