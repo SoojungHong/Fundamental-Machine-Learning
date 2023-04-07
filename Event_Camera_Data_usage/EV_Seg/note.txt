@@ -1,0 +1,24 @@
+#------------------------------
+# train_eager_torch.py
+#------------------------------
+data has event, image, label 
+event is abc.npy 
+image is png 
+lable is png
+
+x is event data, ndarray (2, 320, 320, 6), 2 is batch size, 6 is channels_event 
+y is (i don't know) , ndarray (2, 320, 320, 6), 2 is batch size, 6 is channels_event 
+mask is ndarray, (2, 320, 320) 
+
+event is ndarray, (200, 346, 6) --> later resized as (320, 320, 6)
+mask_image is ndarray (320, 320)
+img (299, 299, 3) 
+label (320, 320)
+mask_image (320, 320) 
+
+y_, y_aux_ = model(x)
+
+model's input to forward() function is Tensor type (2, 3, 320, 320) 
+Y_ is Tensor type (2, 6, 320, 320)
+y_aux_ Tensor type (2, 6, 320, 320) 
+
