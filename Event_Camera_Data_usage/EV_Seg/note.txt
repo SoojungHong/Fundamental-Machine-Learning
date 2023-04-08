@@ -35,3 +35,39 @@ PSPNet (Pyramid Scene Parsing Network) [Paper]
 These are the reference implementation of the models.
 Encoder-Decoder Network definition in https://pypi.org/project/seg-torch/ 
 
+
+#---------------------------------
+# training steps 
+#---------------------------------
+1. data load 
+ loader = Loader.Loader(dataFolderPath=dataset_path, n_classes=n_classes, problemType='segmentation', width=width, height=height, channels=channels_image, channels_events=channels_events)
+ 
+2. model 
+ model = Segception.Segception_small(num_classes=n_classes, weights=None, input_shape=(None, None, channels))
+
+3. train 
+train(loader=loader, model=model, epochs=epochs, batch_size=batch_size, augmenter='segmentation', lr=lr,
+          init_lr=lr, saver=saver_model, variables_to_optimize=variables_to_optimize, name_best_model=name_best_model,
+          evaluation=True, preprocess_mode=None, optimizer = optimizer, scheduler = scheduler)
+
+3.1 get batch 
+ x, y, mask = loader.get_batch(size=batch_size, train=True, augmenter=augmenter)
+
+3.2 get output of the model 
+ x = preprocess(x, mode=preprocess_mode)
+ [x, y, mask] = convert_to_tensors([x, y, mask])
+ x = torch.permute(x, (0, 3, 1, 2))
+ y = torch.permute(y, (0, 3, 1, 2))
+ mask = torch.permute(mask, (0, 1, 2))
+ x = x[:, 0:3, :, :]
+ y_, aux_y_ = model(x, aux_loss=True)
+ 
+3.3 loss is cross-entropy loss
+ loss = nn.functional.cross_entropy(y_, target.long())
+ loss_aux = nn.functional.cross_entropy(aux_y_, target.long())
+ loss = 1 * loss + 0.8 * loss_aux
+ 
+3.4 gradient descent, back-propagation, parameter update until optimize
+optimizer.zero_grad()
+loss.backward()
+optimizer.step()
