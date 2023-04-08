@@ -23,3 +23,15 @@ model's input (which is x) to forward() function is Tensor type (2, 3, 320, 320)
 y_ is Tensor type (2, 6, 320, 320)
 y_aux_ Tensor type (2, 6, 320, 320) 
 
+
+#----------------------------------------
+# Semantic Segmentation using PyTorch 
+#----------------------------------------
+Pytorch implementation of FCN, UNet, PSPNet and various encoder models.
+FCN (Fully Convolutional Networks for Sementic Segmentation) [Paper]
+UNet (Convolutional Networks for Biomedical Image Segmentation) [Paper]
+PSPNet (Pyramid Scene Parsing Network) [Paper]
+
+These are the reference implementation of the models.
+Encoder-Decoder Network definition in https://pypi.org/project/seg-torch/ 
+
