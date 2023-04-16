@@ -190,3 +190,54 @@ plt.xlabel("x [pixels]")
 plt.ylabel("y [pixels]")
 plt.colorbar()
 plt.show()
+
+
+#---------------------------------------
+# %% 3D plot 
+# Time axis in horizontal position
+#---------------------------------------
+
+m = 2000 # Number of points to plot
+print("Space-time plot and movie: numevents = ", m)
+
+# Plot without polarity
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+#ax.set_aspect('equal') # only works for time in Z axis
+ax.scatter(x[:m], timestamp[:m], y[:m], marker='.', c='b')
+ax.set_xlabel('x [pix]')
+ax.set_ylabel('time [s]')
+ax.set_zlabel('y [pix] ')
+ax.view_init(azim=-90, elev=-180) # Change viewpoint with the mouse, for example
+plt.show()
+
+
+
+
+# _____________________________________________________________________________
+# %% Voxel grid
+
+num_bins = 5
+print("Number of time bins = ", num_bins)
+
+t_max = np.amax(np.asarray(timestamp[:m]))
+t_min = np.amin(np.asarray(timestamp[:m]))
+t_range = t_max - t_min
+dt_bin = t_range / num_bins # size of the time bins (bins)
+t_edges = np.linspace(t_min,t_max,num_bins+1) # Boundaries of the bins
+
+# Compute 3D histogram of events manually with a loop
+# ("Zero-th order or nearest neighbor voting")
+hist3d = np.zeros(img.shape+(num_bins,), np.int)
+for ii in range(m):
+    idx_t = int( (timestamp[ii]-t_min) / dt_bin )
+    if idx_t >= num_bins:
+        idx_t = num_bins-1 # only one element (the last one)
+    hist3d[y[ii],x[ii],idx_t] += 1
+
+# Checks:
+print("hist3d")
+print(hist3d.shape)
+print(np.sum(hist3d)) # This should equal the number of votes
+
+
