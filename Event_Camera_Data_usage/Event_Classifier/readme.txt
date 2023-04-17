@@ -1,4 +1,6 @@
 # Reference : rpg_event_representation_learning 
+    - https://github.com/uzh-rpg/rpg_event_representation_learning
+
 
 # example of training 
     - input is event.npy files 
